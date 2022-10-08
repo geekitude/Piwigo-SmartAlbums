@@ -458,6 +458,35 @@ SELECT *
         break;
       }
 
+      // lenstype
+      case 'lenstype':
+      {
+        switch ($filter['cond'])
+        {
+          case 'is':
+            if ($filter['value'] != 'NULL') $filter['value'] = '"'.$filter['value'].'"';
+            $where[] = 'lenstype = '.$filter['value'].'';
+            break;
+          case 'not_is':
+            if ($filter['value'] != 'NULL') $filter['value'] = '"'.$filter['value'].'"';
+            $where[] = 'lenstype != '.$filter['value'].'';
+            break;
+          case 'in':
+            $filter['value'] = '"'.str_replace(',', '","', $filter['value']).'"';
+            $where[] = 'lenstype IN('.$filter['value'].')';
+            break;
+          case 'not_in':
+            $filter['value'] = '"'.str_replace(',', '","', $filter['value']).'"';
+            $where[] = 'lenstype NOT IN('.$filter['value'].')';
+            break;
+          case 'regex':
+            $where[] = 'lenstype REGEXP "'.$filter['value'].'"';
+            break;
+        }
+
+        break;
+      }
+
       // make
       case 'make':
       {
@@ -689,6 +718,23 @@ function smart_check_filter($filter)
       if (empty($filter['value']))
       {
         $page['errors'][] = l10n('Author is empty');
+      }
+      else if ($filter['cond']=='regex' and @preg_match('/'.$filter['value'].'/', null)===false)
+      {
+        $page['errors'][] = l10n('Regex is malformed');
+      }
+      else
+      {
+        $filter['value'] = preg_replace('#([ ]?),([ ]?)#', ',', $filter['value']);
+      }
+      break;
+    }
+    # lenstype
+    case 'lenstype':
+    {
+      if (empty($filter['value']))
+      {
+        $page['errors'][] = l10n('Lenstype is empty');
       }
       else if ($filter['cond']=='regex' and @preg_match('/'.$filter['value'].'/', null)===false)
       {

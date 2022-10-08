@@ -161,6 +161,28 @@
 </li>
 </div>
 
+<!-- lenstype -->
+<div id="filter_lenstype">
+<li id="filter_iiii" class="filter_lenstype">
+  <span class="filter-title">
+    <a href="#" class="removeFilter" title="{'remove this filter'|translate}"><span>[x]</span></a>
+    <input type="hidden" name="filters[iiii][type]" value="lenstype"/>
+    {$options.lenstype.name}
+  </span>
+
+  <span class="filter-cond">
+    <select name="filters[iiii][cond]">
+      {html_options options=$options.lenstype.options}
+    </select>
+  </span>
+
+  <span class="filter-value">
+    <input type="text" name="filters[iiii][value]" size="30"/>
+    <br><i>{'For "Is (not) in", separate each lenstype by a comma'|translate}</i>
+  </span>
+</li>
+</div>
+
 <!-- make -->
 <div id="filter_make">
 <li id="filter_iiii" class="filter_make">
