@@ -487,6 +487,35 @@ SELECT *
         break;
       }
 
+      // model
+      case 'model':
+      {
+        switch ($filter['cond'])
+        {
+          case 'is':
+            if ($filter['value'] != 'NULL') $filter['value'] = '"'.$filter['value'].'"';
+            $where[] = 'model = '.$filter['value'].'';
+            break;
+          case 'not_is':
+            if ($filter['value'] != 'NULL') $filter['value'] = '"'.$filter['value'].'"';
+            $where[] = 'model != '.$filter['value'].'';
+            break;
+          case 'in':
+            $filter['value'] = '"'.str_replace(',', '","', $filter['value']).'"';
+            $where[] = 'model IN('.$filter['value'].')';
+            break;
+          case 'not_in':
+            $filter['value'] = '"'.str_replace(',', '","', $filter['value']).'"';
+            $where[] = 'model NOT IN('.$filter['value'].')';
+            break;
+          case 'regex':
+            $where[] = 'model REGEXP "'.$filter['value'].'"';
+            break;
+        }
+
+        break;
+      }
+
       // hit
       case 'hit':
       {
@@ -677,6 +706,23 @@ function smart_check_filter($filter)
       if (empty($filter['value']))
       {
         $page['errors'][] = l10n('Make is empty');
+      }
+      else if ($filter['cond']=='regex' and @preg_match('/'.$filter['value'].'/', null)===false)
+      {
+        $page['errors'][] = l10n('Regex is malformed');
+      }
+      else
+      {
+        $filter['value'] = preg_replace('#([ ]?),([ ]?)#', ',', $filter['value']);
+      }
+      break;
+    }
+    # model
+    case 'model':
+    {
+      if (empty($filter['value']))
+      {
+        $page['errors'][] = l10n('Model is empty');
       }
       else if ($filter['cond']=='regex' and @preg_match('/'.$filter['value'].'/', null)===false)
       {

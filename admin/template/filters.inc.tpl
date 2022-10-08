@@ -183,6 +183,28 @@
 </li>
 </div>
 
+<!-- model -->
+<div id="filter_model">
+<li id="filter_iiii" class="filter_model">
+  <span class="filter-title">
+    <a href="#" class="removeFilter" title="{'remove this filter'|translate}"><span>[x]</span></a>
+    <input type="hidden" name="filters[iiii][type]" value="model"/>
+    {$options.model.name}
+  </span>
+
+  <span class="filter-cond">
+    <select name="filters[iiii][cond]">
+      {html_options options=$options.model.options}
+    </select>
+  </span>
+
+  <span class="filter-value">
+    <input type="text" name="filters[iiii][value]" size="30"/>
+    <br><i>{'For "Is (not) in", separate each model by a comma'|translate}</i>
+  </span>
+</li>
+</div>
+
 <!-- hit -->
 <div id="filter_hit">
 <li id="filter_iiii" class="filter_hit">

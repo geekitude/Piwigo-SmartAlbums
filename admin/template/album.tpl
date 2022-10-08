@@ -328,6 +328,7 @@ doBlink('.new_smart', 0, 3);
         <option value="dimensions">{'Dimensions'|translate}</option>
         <option value="author">{'Author'|translate}</option>
         <option value="make">{'Make'|translate}</option>
+        <option value="model">{'Model'|translate}</option>
         <option value="hit">{'Hits'|translate}</option>
         <option value="rating_score">{'Rating score'|translate}</option>
         <option value="level">{'Privacy level'|translate}</option>
