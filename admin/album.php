@@ -177,6 +177,16 @@ $options = array(
       'regex'   => l10n('Regular expression'),
       ),
     ),
+  'make' => array(
+    'name' => l10n('Make'),
+    'options' => array(
+      'is'      => l10n('Is'),
+      'in'      => l10n('Is in'),
+      'not_is'  => l10n('Is not'),
+      'not_in'  => l10n('Is not in'),
+      'regex'   => l10n('Regular expression'),
+      ),
+    ),
   'hit' => array(
     'name' => l10n('Hits'),
     'options' => array(
